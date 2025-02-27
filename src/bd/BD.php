@@ -2,7 +2,7 @@
 
 namespace App\bd;
 
-use PDO;
+use \PDO;
 
 /**
  * Clase que representa el singleton de la conexión a la Base de Datos
