@@ -1,50 +1,32 @@
 <?php
 
-namespace App\bd;
+namespace App\BD;
 
+use Dotenv\Dotenv;
 use \PDO;
 
-/**
- * Clase que representa el singleton de la conexión a la Base de Datos
- */
 class BD {
-    /*
-     * @var ?PDO $bd Almacena la única instancia PDO de conexión
-     */
 
-    protected static ?PDO $bd = null;
+    protected static $bd = null;
 
-    /**
-     * Constructor privado de la clase BD
-     * 
-     * @param string $host Nombre del Host donde reside el servidor de la base de datos
-     * @param string $port Número del puerto donde escucha el servidor de la base de datos
-     * @param string $database Nombre de la base de datos del juego
-     * @param string $usuario Nombre del usuario para acceder a la base de datos 
-     * @param string $passwrod Password del usuario
-     * 
-     * @returns void
-     */
-    private function __construct(string $host, string $port, string $database, string $usuario, string $password) {
-        self::$bd = new \PDO("mysql:host=" . "$host:$port" . ";dbname=" . $database, $usuario, $password);
-        self::$bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        self::$bd->setAttribute(PDO::ATTR_CASE, PDO::CASE_NATURAL);
+    private function __construct(string $host, string $database, string $username, string $password) {
+        try {
+            self::$bd = new PDO("mysql:host=" . $host . ";dbname=" . $database, $username, $password);
+            self::$bd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage(), $e->getCode());
+        }
     }
 
-    /**
-     * Obtiene una instancia del singleton
-     * 
-     * @param string $host Nombre del Host donde reside el servidor de la base de datos
-     * @param string $port Número del puerto donde escucha el servidor de la base de datos
-     * @param string $database Nombre de la base de datos del juego
-     * @param string $usuario Nombre del usuario para acceder a la base de datos 
-     * @param string $passwrod Password del usuario
-     * 
-     * @returns void
-     */
-    public static function getConexion(string $host, string $port, string $database, string $usuario, string $password) {
+    public static function getConexion() {
         if (!self::$bd) {
-            new BD($host, $port, $database, $usuario, $password);
+            $dotenv = Dotenv::createImmutable(__DIR__ . "/../../");
+            $dotenv->load();
+            $host = $_ENV['DB_HOST'];
+            $database = $_ENV['DB_DATABASE'];
+            $usuario = $_ENV['DB_USUARIO'];
+            $password = $_ENV['DB_PASSWORD'];
+            new BD($host, $database, $usuario, $password);
         }
         return self::$bd;
     }

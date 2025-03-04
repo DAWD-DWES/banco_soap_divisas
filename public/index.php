@@ -30,12 +30,7 @@ $blade->setBaseURL("http://{$_SERVER['SERVER_NAME']}:{$_SERVER['SERVER_PORT']}/"
 
 // Establece conexión a la base de datos PDO
 try {
-    $host = $_ENV['DB_HOST'];
-    $port = $_ENV['DB_PORT'];
-    $database = $_ENV['DB_DATABASE'];
-    $usuario = $_ENV['DB_USUARIO'];
-    $password = $_ENV['DB_PASSWORD'];
-    $bd = BD::getConexion($host, $port, $database, $usuario, $password);
+    $bd = BD::getConexion();
 } catch (PDOException $error) {
     echo $blade->run("cnxbderror", compact('error'));
     die;

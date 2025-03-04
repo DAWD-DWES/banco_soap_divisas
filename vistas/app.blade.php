@@ -22,13 +22,19 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
+                            <a class="nav-link" href="index.php">Clientes y Cuentas</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="index.php?pettransferencia">Transferencias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="divisa.php?petconsultadivisa">Consulta Cambio Divisa</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        
+
         <main class="flex-fill">
             <!-- Área de contenido central -->
             <div class="container mt-4">
