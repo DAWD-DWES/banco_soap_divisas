@@ -19,10 +19,10 @@ class BD {
                 $dotenv->safeLoad(); // Usa safeLoad para evitar errores si falta el .env
             }
 
-            $host = $_ENV['DB_HOST'] ?? 'localhost';
-            $database = $_ENV['DB_DATABASE'] ?? 'test';
-            $username = $_ENV['DB_USUARIO'] ?? 'root';
-            $password = $_ENV['DB_PASSWORD'] ?? '';
+            $host = $_ENV['DB_HOST'];
+            $database = $_ENV['DB_DATABASE'];
+            $username = $_ENV['DB_USUARIO'];
+            $password = $_ENV['DB_PASSWORD'];
 
             // Crear la conexión PDO
             $this->conexion = new PDO(
@@ -30,7 +30,7 @@ class BD {
                 $username,
                 $password,
                 [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
                 ]
             );
         } catch (PDOException $e) {
@@ -46,8 +46,8 @@ class BD {
     }
 
     // Evitar la clonación del objeto
-    private function __clone() {}
+    public function __clone() {}
 
     // Evitar la deserialización del objeto
-    private function __wakeup() {}
+    public function __wakeup() {}
 }
