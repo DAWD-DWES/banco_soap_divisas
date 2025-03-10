@@ -10,11 +10,9 @@ use App\dao\{
     CuentaDAO,
     ClienteDAO
 };
-use App\modelo\{
-    Banco,
-    IGestorDivisas,
-    GestorDivisasSOAP
-};
+use App\modelo\Banco;
+use App\servicios\GestorDivisasSOAP;
+
 use eftec\bladeone\BladeOne;
 use Dotenv\Dotenv;
 
