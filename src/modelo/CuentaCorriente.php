@@ -2,8 +2,8 @@
 
 namespace App\modelo;
 
-use App\modelo\Operacion;
 use App\modelo\Cuenta;
+use App\excepciones\SaldoInsuficienteException;
 
 /**
  * Clase CuentaCorriente 
@@ -23,7 +23,7 @@ class CuentaCorriente extends Cuenta {
         $operacion = new Operacion($this->getId(), TipoOperacion::DEBITO, $cantidad, $descripcion);
         $this->agregaOperacion($operacion);
         $this->setSaldo($this->getSaldo() - $cantidad);
-        return $operacion;
+        return ($operacion);
     }
 
     public function aplicaComision($comision, $minSaldo): ?Operacion {

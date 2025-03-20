@@ -5,7 +5,7 @@ namespace App\modelo;
 use App\modelo\IProductoBancario;
 
 /**
- * Clase TarjetaCredito 
+ * Clase TarjetaCredito
  */
 class TarjetaCredito implements IProductoBancario {
 
@@ -95,7 +95,7 @@ class TarjetaCredito implements IProductoBancario {
         }
     }
 
-    public function __toString(): string {
+    public function __toString() {
         return "Num Tarjeta: {$this->getNumero()}</br>" .
                 "Limite: {$this->getLimite()}</br>";
     }

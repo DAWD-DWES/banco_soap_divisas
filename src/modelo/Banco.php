@@ -239,8 +239,8 @@ class Banco {
             throw new ClienteNoEncontradoException($dni);
         }
     }
-    
-     /**
+
+    /**
      * Obtiene el objeto cliente del banco
      * 
      * @param int $idCliente

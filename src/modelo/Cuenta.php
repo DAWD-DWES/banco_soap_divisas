@@ -2,14 +2,13 @@
 
 namespace App\modelo;
 
+use \App\modelo\Operacion;
 use \DateTime;
 
 /**
  * Clase Cuenta 
  */
 abstract class Cuenta implements IProductoBancario {
-
-    protected OperacionDAO $operacionDAO;
 
     /**
      * Id de la cuenta
@@ -112,11 +111,11 @@ abstract class Cuenta implements IProductoBancario {
      * @param type $descripcion Descripción del ingreso
      */
     public function ingreso(float $cantidad, string $descripcion): Operacion {
-        if ($cantidad > 0) {
+        if ($cantidad >= 0) {
             $operacion = new Operacion($this->getId(), TipoOperacion::INGRESO, $cantidad, $descripcion);
             $this->agregaOperacion($operacion);
             $this->setSaldo($this->getSaldo() + $cantidad);
-            return $operacion;
+            return ($operacion);
         }
     }
 

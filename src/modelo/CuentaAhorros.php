@@ -3,7 +3,6 @@
 namespace App\modelo;
 
 use App\modelo\Cuenta;
-use App\modelo\Operacion;
 use App\excepciones\SaldoInsuficienteException;
 
 /**
@@ -52,7 +51,7 @@ class CuentaAhorros extends Cuenta {
             $operacion = new Operacion($this->getId(), TipoOperacion::DEBITO, $cantidad, $descripcion);
             $this->agregaOperacion($operacion);
             $this->setSaldo($this->getSaldo() - $cantidad);
-            return $operacion;
+            return ($operacion);
         } else {
             throw new SaldoInsuficienteException($this->getId(), $cantidad);
         }
